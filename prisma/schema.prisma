@@ -13,6 +13,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Org {
+  id            String @id @default(uuid())
+  name          String
+  email         String @unique
+  whatsapp      String
+  password_hash String
+
+  created_at DateTime @default(now())
+
+  address_id String @unique
+
+  address Address @relation(fields: [address_id], references: [id])
+
+  @@map("orgs")
+}
+
 model State {
   id   String @id @default(uuid())
   name String @unique
@@ -33,6 +49,7 @@ model City {
   state     State     @relation(fields: [state_id], references: [id])
   addresses Address[]
 
+  @@unique([state_id, name])
   @@map("cities")
 }
 
@@ -52,6 +69,7 @@ model Address {
 
   state State @relation(fields: [state_id], references: [id])
   city  City  @relation(fields: [city_id], references: [id])
+  org   Org?
 
   @@map("addresses")
 }
