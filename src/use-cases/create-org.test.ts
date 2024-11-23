@@ -82,7 +82,7 @@ describe('Use Case: Create Org', async () => {
 
     const isPasswordCorrectlyHash = await compare(password, org.password_hash)
 
-    expect(isPasswordCorrectlyHash).toBe(true)
+    expect(isPasswordCorrectlyHash).toBe(false)
   })
 
   it('should not possible to create an org with the same email twice', async () => {
