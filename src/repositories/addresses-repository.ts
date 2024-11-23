@@ -5,7 +5,7 @@ export interface AddressesRepository {
 
   createAddress(data: Prisma.AddressUncheckedCreateInput): Promise<Address>
 
-  findStateById(id: string): Promise<State>
+  findStateById(id: string): Promise<State | null>
 
-  findCityByNameAndStateId(name: string, stateId: string): Promise<City>
+  findCityByNameAndStateId(name: string, stateId: string): Promise<City | null>
 }
