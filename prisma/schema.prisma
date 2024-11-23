@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model State {
+  id   String @id @default(uuid())
+  name String @unique
+  uf   String @unique
+
+  cities    City[]
+  addresses Address[]
+
+  @@map("states")
+}
+
+model City {
+  id   String @id @default(uuid())
+  name String
+
+  state_id String
+
+  state     State     @relation(fields: [state_id], references: [id])
+  addresses Address[]
+
+  @@map("cities")
+}
+
+model Address {
+  id         String  @id @default(uuid())
+  zip_code   String  @db.Char(8)
+  street     String
+  district   String
+  number     String
+  complement String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  state_id String
+  city_id  String
+
+  state State @relation(fields: [state_id], references: [id])
+  city  City  @relation(fields: [city_id], references: [id])
+
+  @@map("addresses")
+}
