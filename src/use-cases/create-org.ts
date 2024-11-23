@@ -2,24 +2,20 @@ import { Org } from '@prisma/client'
 import { hash } from 'bcryptjs'
 
 import { OrgAlreadyExistsError } from '@/errors/org-already-exists-error'
-import { ResourceNotFoundError } from '@/errors/resource-not-found-error'
 import { AddressesRepository } from '@/repositories/addresses-repository'
 import { OrgsRepository } from '@/repositories/orgs-repository'
+
+import {
+  CreateAddressUseCase,
+  CreateAddressUseCaseRequest,
+} from './create-address'
 
 interface CreateOrgUseCaseRequest {
   name: string
   email: string
   password: string
   whatsapp: string
-  orgAddress: {
-    zipCode: string
-    stateId: string
-    city: string
-    street: string
-    district: string
-    number: string
-    complement?: string
-  }
+  orgAddress: CreateAddressUseCaseRequest
 }
 
 interface CreateOrgUseCaseResponse {
@@ -45,35 +41,11 @@ export class CreateOrgUseCase {
       throw new OrgAlreadyExistsError()
     }
 
-    const state = await this.addressesRepository.findStateById(
-      orgAddress.stateId,
+    const createAddressUseCase = new CreateAddressUseCase(
+      this.addressesRepository,
     )
 
-    if (!state) {
-      throw new ResourceNotFoundError()
-    }
-
-    let city = await this.addressesRepository.findCityByNameAndStateId(
-      orgAddress.city,
-      state.id,
-    )
-
-    if (!city) {
-      city = await this.addressesRepository.createCity(
-        orgAddress.city,
-        state.id,
-      )
-    }
-
-    const address = await this.addressesRepository.createAddress({
-      zip_code: orgAddress.zipCode,
-      state_id: state.id,
-      city_id: city.id,
-      street: orgAddress.street,
-      district: orgAddress.district,
-      number: orgAddress.number,
-      complement: orgAddress.complement,
-    })
+    const { address } = await createAddressUseCase.execute(orgAddress)
 
     const org = await this.orgsRepository.create({
       name,
