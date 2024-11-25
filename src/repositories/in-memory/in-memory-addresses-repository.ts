@@ -23,7 +23,7 @@ export class InMemoryAddressesRepository implements AddressesRepository {
 
   async createAddress(data: Prisma.AddressUncheckedCreateInput) {
     const address: Address = {
-      id: randomUUID(),
+      id: data.id ?? randomUUID(),
       zip_code: data.zip_code,
       state_id: data.state_id,
       city_id: data.city_id,
