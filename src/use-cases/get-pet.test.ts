@@ -1,23 +1,17 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { ResourceNotFoundError } from '@/errors/resource-not-found-error'
-import { InMemoryAddressesRepository } from '@/repositories/in-memory/in-memory-addresses-repository'
-import { InMemoryOrgsRepository } from '@/repositories/in-memory/in-memory-orgs-repository'
 import { InMemoryPetsRepository } from '@/repositories/in-memory/in-memory-pets-repository'
 
 import { GetPetUseCase } from './get-pet'
 
-let addressesRepository: InMemoryAddressesRepository
-let orgsRepository: InMemoryOrgsRepository
 let petsRepository: InMemoryPetsRepository
 
 let sut: GetPetUseCase
 
 describe('Use Case: Get Pet', async () => {
   beforeEach(async () => {
-    addressesRepository = new InMemoryAddressesRepository()
-    orgsRepository = new InMemoryOrgsRepository(addressesRepository)
-    petsRepository = new InMemoryPetsRepository(orgsRepository)
+    petsRepository = new InMemoryPetsRepository()
 
     sut = new GetPetUseCase(petsRepository)
   })

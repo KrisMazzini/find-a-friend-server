@@ -56,7 +56,6 @@ export class InMemoryPetsRepository implements PetsRepository {
       .filter((pet) => orgIds.has(pet.org_id))
       .filter((pet) => (ageRange ? pet.age_range === ageRange : true))
       .filter((pet) => (energyLevel ? pet.energy_level === energyLevel : true))
-      .filter((pet) => (energyLevel ? pet.energy_level === energyLevel : true))
       .filter((pet) => (size ? pet.size === size : true))
       .filter((pet) =>
         environmentSize ? pet.environment_size === environmentSize : true,
