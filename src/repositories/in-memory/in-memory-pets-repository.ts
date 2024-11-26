@@ -29,13 +29,31 @@ export class InMemoryPetsRepository implements PetsRepository {
     return pet
   }
 
-  async findAll({ cityId, page }: FindAllParams) {
+  async findAll({
+    cityId,
+    ageRange,
+    energyLevel,
+    environmentSize,
+    independencyLevel,
+    size,
+    page,
+  }: FindAllParams) {
     const orgsByCity = await this.orgsRepository.findManyByCityId(cityId)
 
     const orgIds = new Set(orgsByCity.map((org) => org.id))
 
     const pets = this.pets
       .filter((pet) => orgIds.has(pet.org_id))
+      .filter((pet) => (ageRange ? pet.age_range === ageRange : true))
+      .filter((pet) => (energyLevel ? pet.energy_level === energyLevel : true))
+      .filter((pet) => (energyLevel ? pet.energy_level === energyLevel : true))
+      .filter((pet) => (size ? pet.size === size : true))
+      .filter((pet) =>
+        environmentSize ? pet.environment_size === environmentSize : true,
+      )
+      .filter((pet) =>
+        independencyLevel ? pet.independency_level === independencyLevel : true,
+      )
       .slice((page - 1) * 20, page * 20)
 
     return pets

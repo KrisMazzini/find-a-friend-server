@@ -2,6 +2,11 @@ import { Pet, Prisma } from '@prisma/client'
 
 export interface FindAllParams {
   cityId: string
+  ageRange?: string
+  size?: string
+  environmentSize?: string
+  energyLevel?: string
+  independencyLevel?: string
   page: number
 }
 

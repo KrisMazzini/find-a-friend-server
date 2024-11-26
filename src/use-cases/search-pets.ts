@@ -1,11 +1,8 @@
 import { Pet } from '@prisma/client'
 
-import { PetsRepository } from '@/repositories/pets-respository'
+import { FindAllParams, PetsRepository } from '@/repositories/pets-respository'
 
-interface SearchPetsUseCaseRequest {
-  cityId: string
-  page: number
-}
+type SearchPetsUseCaseRequest = FindAllParams
 
 interface SearchPetsUseCaseResponse {
   pets: Pet[]
@@ -14,11 +11,10 @@ interface SearchPetsUseCaseResponse {
 export class SearchPetsUseCase {
   constructor(private petsRepository: PetsRepository) {}
 
-  async execute({
-    cityId,
-    page,
-  }: SearchPetsUseCaseRequest): Promise<SearchPetsUseCaseResponse> {
-    const pets = await this.petsRepository.findAll({ cityId, page })
+  async execute(
+    params: SearchPetsUseCaseRequest,
+  ): Promise<SearchPetsUseCaseResponse> {
+    const pets = await this.petsRepository.findAll(params)
 
     return { pets }
   }
