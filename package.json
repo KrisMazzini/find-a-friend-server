@@ -10,8 +10,8 @@
     "lint": "eslint src --ext .ts --fix",
     "test": "vitest run --dir src/use-cases",
     "test:watch": "vitest --dir src/use-cases",
-    "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test:coverage": "vitest run --dir src --coverage",
+    "test:ui": "vitest --dir src --ui"
   },
   "author": "",
   "license": "ISC",

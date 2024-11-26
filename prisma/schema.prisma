@@ -13,6 +13,52 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum AgeRange {
+  INFANT
+  JUVENILE
+  ADULT
+  SENIOR
+}
+
+enum Size {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum EnergyLevel {
+  VERY_LOW
+  LOW
+  MODERATE
+  HIGH
+  VERY_HIGH
+}
+
+enum IndependencyLevel {
+  LOW
+  MODERATE
+  HIGH
+}
+
+model Pet {
+  id                 String            @id @default(uuid())
+  name               String
+  about              String
+  age_range          AgeRange
+  size               Size
+  environment_size   Size
+  energy_level       EnergyLevel
+  independency_level IndependencyLevel
+
+  created_at DateTime @default(now())
+
+  org_id String
+
+  org Org @relation(fields: [org_id], references: [id])
+
+  @@map("pets")
+}
+
 model Org {
   id            String @id @default(uuid())
   name          String
@@ -25,6 +71,7 @@ model Org {
   address_id String @unique
 
   address Address @relation(fields: [address_id], references: [id])
+  pets    Pet[]
 
   @@map("orgs")
 }
