@@ -5,7 +5,7 @@ Find a friend
 - [X] Deve ser possível cadastrar um pet
 - [X] Deve ser possível listar todos os pets disponíveis para adoção em uma cidade
 - [X] Deve ser possível filtrar pets por suas características
-- [] Deve ser possível visualizar detalhes de um pet para adoção
+- [X] Deve ser possível visualizar detalhes de um pet para adoção
 - [X] Deve ser possível se cadastrar como uma ORG
 - [] Deve ser possível realizar login como uma ORG
 
@@ -19,6 +19,6 @@ Find a friend
 
 # RNFs (Requisitos não funcionais)
 - [X] A senha do usuário precisa estar criptografada;
-- [] Os dados da aplicação precisam estar persistidos em um banco PostgreSQL;
+- [X] Os dados da aplicação precisam estar persistidos em um banco PostgreSQL;
 - [X] Todas listas de dados precisam estar paginadas com 20 itens por página;
 - [] O usuário deve ser identificado por um JWT (JSON Web Token);
