@@ -1,4 +1,10 @@
-import { Pet } from '@prisma/client'
+import {
+  AgeRange,
+  EnergyLevel,
+  IndependencyLevel,
+  Pet,
+  Size,
+} from '@prisma/client'
 
 import { ResourceNotFoundError } from '@/errors/resource-not-found-error'
 import { OrgsRepository } from '@/repositories/orgs-repository'
@@ -8,11 +14,11 @@ interface CreatePetUseCaseRequest {
   orgId: string
   name: string
   about: string
-  ageRange: 'INFANT' | 'JUVENILE' | 'ADULT' | 'SENIOR'
-  size: 'SMALL' | 'MEDIUM' | 'LARGE'
-  environmentSize: 'SMALL' | 'MEDIUM' | 'LARGE'
-  energyLevel: 'VERY_LOW' | 'LOW' | 'MODERATE' | 'HIGH' | 'VERY_HIGH'
-  independencyLevel: 'LOW' | 'MODERATE' | 'HIGH'
+  ageRange: AgeRange
+  size: Size
+  environmentSize: Size
+  energyLevel: EnergyLevel
+  independencyLevel: IndependencyLevel
 }
 
 interface CreatePetUseCaseResponse {
