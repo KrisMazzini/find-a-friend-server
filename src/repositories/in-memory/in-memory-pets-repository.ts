@@ -8,7 +8,7 @@ import { FindAllParams, PetsRepository } from '../pets-respository'
 export class InMemoryPetsRepository implements PetsRepository {
   public pets: Pet[] = []
 
-  constructor(private orgsRepository: OrgsRepository) {}
+  constructor(private orgsRepository?: OrgsRepository) {}
 
   async create(data: Prisma.PetUncheckedCreateInput) {
     const pet: Pet = {
@@ -44,6 +44,10 @@ export class InMemoryPetsRepository implements PetsRepository {
     size,
     page,
   }: FindAllParams) {
+    if (!this.orgsRepository) {
+      throw new Error('Please provide an orgs repository.')
+    }
+
     const orgsByCity = await this.orgsRepository.findManyByCityId(cityId)
 
     const orgIds = new Set(orgsByCity.map((org) => org.id))

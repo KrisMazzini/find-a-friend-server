@@ -8,7 +8,7 @@ import { InMemoryAddressesRepository } from './in-memory-addresses-repository'
 export class InMemoryOrgsRepository implements OrgsRepository {
   public orgs: Org[] = []
 
-  constructor(private addressesRespository: InMemoryAddressesRepository) {}
+  constructor(private addressesRespository?: InMemoryAddressesRepository) {}
 
   async create(data: Prisma.OrgUncheckedCreateInput) {
     const org: Org = {
@@ -39,6 +39,10 @@ export class InMemoryOrgsRepository implements OrgsRepository {
   }
 
   async findManyByCityId(cityId: string) {
+    if (!this.addressesRespository) {
+      throw new Error('Please provide an addresses repository.')
+    }
+
     const addressesByCity = this.addressesRespository.addresses.filter(
       (address) => address.city_id === cityId,
     )
