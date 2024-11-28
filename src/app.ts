@@ -5,6 +5,7 @@ import { ZodError } from 'zod'
 
 import { env } from './env'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { petRoutes } from './http/controllers/middlewares/pets/routes'
 import { orgRoutes } from './http/controllers/orgs/routes'
 
 export const app = fastify()
@@ -23,6 +24,7 @@ app.register(fastifyJwt, {
 app.register(fastifyCookie)
 
 app.register(orgRoutes)
+app.register(petRoutes, { prefix: '/pets' })
 
 app.setErrorHandler(async (error, _, reply) => {
   if (error instanceof ZodError) {
