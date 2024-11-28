@@ -10,7 +10,7 @@ export interface CreateAddressUseCaseRequest {
   street: string
   district: string
   number: string
-  complement?: string
+  complement: string | null
 }
 
 interface CreateAddressUseCaseResponse {
@@ -32,7 +32,7 @@ export class CreateAddressUseCase {
     const state = await this.addressesRepository.findStateById(stateId)
 
     if (!state) {
-      throw new ResourceNotFoundError()
+      throw new ResourceNotFoundError('State')
     }
 
     let city = await this.addressesRepository.findCityByNameAndStateId(

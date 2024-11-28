@@ -20,7 +20,7 @@ export class GetPetUseCase {
     const pet = await this.petsRepository.findById(petId)
 
     if (!pet) {
-      throw new ResourceNotFoundError()
+      throw new ResourceNotFoundError('Pet')
     }
 
     return { pet }

@@ -31,7 +31,7 @@ describe('Use Case: Create Org', async () => {
       email: 'petlovers@org.com',
       password: '123456',
       whatsapp: '32999999999',
-      orgAddress: {
+      address: {
         zipCode: '36000000',
         stateId: 'state-id',
         cityName: 'Juiz de Fora',
@@ -69,7 +69,7 @@ describe('Use Case: Create Org', async () => {
       email: 'petlovers@org.com',
       password,
       whatsapp: '32999999999',
-      orgAddress: {
+      address: {
         zipCode: '36000000',
         stateId: 'state-id',
         cityName: 'Juiz de Fora',
@@ -99,7 +99,7 @@ describe('Use Case: Create Org', async () => {
       email,
       password: '123456',
       whatsapp: '32999999999',
-      orgAddress: {
+      address: {
         zipCode: '36000000',
         stateId: 'state-id',
         cityName: 'Juiz de Fora',
@@ -116,7 +116,7 @@ describe('Use Case: Create Org', async () => {
         email,
         password: '123456',
         whatsapp: '32999999999',
-        orgAddress: {
+        address: {
           zipCode: '36000000',
           stateId: 'state-id',
           cityName: 'Juiz de Fora',

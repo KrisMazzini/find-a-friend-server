@@ -44,7 +44,7 @@ export class CreatePetUseCase {
     const org = await this.orgsRepository.findById(orgId)
 
     if (!org) {
-      throw new ResourceNotFoundError()
+      throw new ResourceNotFoundError('Org')
     }
 
     const pet = await this.petsRepository.create({

@@ -51,6 +51,8 @@ describe('Use Case: Create Address', async () => {
         updated_at: expect.any(Date),
       }),
     )
+
+    expect(addressesRepository.cities).toHaveLength(1)
   })
 
   it('should be possible to create an address when the city is not registered yet', async () => {
@@ -84,6 +86,8 @@ describe('Use Case: Create Address', async () => {
         updated_at: expect.any(Date),
       }),
     )
+
+    expect(addressesRepository.cities).toHaveLength(1)
   })
 
   it('should not be possible to create an address to a non-existing state', async () => {

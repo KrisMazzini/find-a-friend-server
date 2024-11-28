@@ -15,7 +15,7 @@ interface CreateOrgUseCaseRequest {
   email: string
   password: string
   whatsapp: string
-  orgAddress: CreateAddressUseCaseRequest
+  address: CreateAddressUseCaseRequest
 }
 
 interface CreateOrgUseCaseResponse {
@@ -33,7 +33,7 @@ export class CreateOrgUseCase {
     email,
     whatsapp,
     password,
-    orgAddress,
+    address,
   }: CreateOrgUseCaseRequest): Promise<CreateOrgUseCaseResponse> {
     const orgWithSameEmail = await this.orgsRepository.findByEmail(email)
 
@@ -45,14 +45,15 @@ export class CreateOrgUseCase {
       this.addressesRepository,
     )
 
-    const { address } = await createAddressUseCase.execute(orgAddress)
+    const { address: createdAdress } =
+      await createAddressUseCase.execute(address)
 
     const org = await this.orgsRepository.create({
       name,
       email,
       whatsapp,
       password_hash: await hash(password, 6),
-      address_id: address.id,
+      address_id: createdAdress.id,
     })
 
     return { org }
