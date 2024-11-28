@@ -1,9 +1,9 @@
 import fastify from 'fastify'
 import { ZodError } from 'zod'
 
-import { orgRoutes } from './controllers/orgs/routes'
 import { env } from './env'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { orgRoutes } from './http/controllers/orgs/routes'
 
 export const app = fastify()
 
