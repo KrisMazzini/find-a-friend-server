@@ -4,7 +4,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { app } from '@/app'
 import { prisma } from '@/lib/prisma'
 
-describe('E2E: Authenticate', async () => {
+describe('E2E: Refresh Token', async () => {
   beforeAll(async () => {
     await app.ready()
   })
@@ -13,7 +13,7 @@ describe('E2E: Authenticate', async () => {
     await app.close()
   })
 
-  it('should be possible to authenticate as an org', async () => {
+  it('should be possible to refresh a token', async () => {
     const state = await prisma.state.create({
       data: {
         name: 'Minas Gerais',
@@ -39,12 +39,19 @@ describe('E2E: Authenticate', async () => {
         },
       })
 
-    const response = await request(app.server).post('/sessions').send({
+    const authResponse = await request(app.server).post('/sessions').send({
       email: 'petlovers@org.com',
       password: '123456',
     })
 
-    expect(response.statusCode).toBe(200)
+    const cookies = authResponse.get('Set-Cookie') ?? []
+
+    const response = await request(app.server)
+      .patch('/tokens/refresh')
+      .set('Cookie', cookies)
+      .send()
+
+    expect(response.statusCode).toEqual(200)
     expect(response.body).toEqual({
       token: expect.any(String),
     })
