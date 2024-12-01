@@ -1,6 +1,6 @@
 import { Address } from '@prisma/client'
 
-import { ResourceNotFoundError } from '@/errors/resource-not-found-error'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 import { AddressesRepository } from '@/repositories/addresses-repository'
 
 export interface CreateAddressUseCaseRequest {

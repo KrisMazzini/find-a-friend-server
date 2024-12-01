@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-import { OrgAlreadyExistsError } from '@/errors/org-already-exists-error'
+import { OrgAlreadyExistsError } from '@/use-cases/errors/org-already-exists-error'
 import { makeCreateOrgUseCase } from '@/use-cases/factories/make-create-org-use-case'
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {

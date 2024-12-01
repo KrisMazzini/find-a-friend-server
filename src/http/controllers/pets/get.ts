@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-import { ResourceNotFoundError } from '@/errors/resource-not-found-error'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 import { makeGetPetUseCase } from '@/use-cases/factories/make-get-pet-use-case'
 
 export async function get(request: FastifyRequest, reply: FastifyReply) {

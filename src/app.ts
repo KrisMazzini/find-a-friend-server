@@ -4,9 +4,9 @@ import fastify from 'fastify'
 import { ZodError } from 'zod'
 
 import { env } from './env'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { orgRoutes } from './http/controllers/orgs/routes'
 import { petRoutes } from './http/controllers/pets/routes'
+import { ResourceNotFoundError } from './use-cases/errors/resource-not-found-error'
 
 export const app = fastify()
 

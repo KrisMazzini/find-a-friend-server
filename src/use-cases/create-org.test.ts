@@ -1,7 +1,7 @@
 import { compare } from 'bcryptjs'
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import { OrgAlreadyExistsError } from '@/errors/org-already-exists-error'
+import { OrgAlreadyExistsError } from '@/use-cases/errors/org-already-exists-error'
 import { InMemoryAddressesRepository } from '@/repositories/in-memory/in-memory-addresses-repository'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/in-memory-orgs-repository'
 
