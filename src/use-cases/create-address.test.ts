@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import { ResourceNotFoundError } from '@/errors/resource-not-found-error'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 import { InMemoryAddressesRepository } from '@/repositories/in-memory/in-memory-addresses-repository'
 
 import { CreateAddressUseCase } from './create-address'

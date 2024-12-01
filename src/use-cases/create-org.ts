@@ -1,7 +1,7 @@
 import { Org } from '@prisma/client'
 import { hash } from 'bcryptjs'
 
-import { OrgAlreadyExistsError } from '@/errors/org-already-exists-error'
+import { OrgAlreadyExistsError } from '@/use-cases/errors/org-already-exists-error'
 import { AddressesRepository } from '@/repositories/addresses-repository'
 import { OrgsRepository } from '@/repositories/orgs-repository'
 

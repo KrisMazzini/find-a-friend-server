@@ -6,7 +6,7 @@ import {
   Size,
 } from '@prisma/client'
 
-import { ResourceNotFoundError } from '@/errors/resource-not-found-error'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 import { OrgsRepository } from '@/repositories/orgs-repository'
 import { PetsRepository } from '@/repositories/pets-respository'
 
